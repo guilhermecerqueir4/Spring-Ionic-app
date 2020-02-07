@@ -4,28 +4,28 @@ package com.guilherme.projSpring.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.guilherme.projSpring.domain.Categoria;
+import com.guilherme.projSpring.services.CategoriaService;
 
 
 @RestController
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 
-	@RequestMapping(method=RequestMethod.GET)
-	public List<Categoria> listarCat() {
-		
-		Categoria cat3 = new Categoria(1, "oi");
-		Categoria cat4 = new Categoria(2, "ola");
-		
-		List<Categoria> lista1 = new ArrayList<>();
-		lista1.add(cat3);
-		lista1.add(cat4);
-		
-		return lista1;
+	@Autowired
+	private CategoriaService service;
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Categoria obj = service.buscar(id);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 }
