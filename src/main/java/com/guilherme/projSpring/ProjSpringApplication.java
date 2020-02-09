@@ -8,7 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.guilherme.projSpring.domain.Categoria;
+import com.guilherme.projSpring.domain.Produto;
 import com.guilherme.projSpring.repositories.CategoriaRepository;
+import com.guilherme.projSpring.repositories.ProdutoRepository;
 
 @SpringBootApplication
 public class ProjSpringApplication implements CommandLineRunner  {
@@ -16,6 +18,8 @@ public class ProjSpringApplication implements CommandLineRunner  {
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	@Autowired
+	private ProdutoRepository produtoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjSpringApplication.class, args);
@@ -26,10 +30,20 @@ public class ProjSpringApplication implements CommandLineRunner  {
 		
 		Categoria cat1 = new Categoria(null, "informatica");
 		Categoria cat2 = new Categoria(null, "escritorio");
-		Categoria cat3 = new Categoria(null, "alright");
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1,cat2, cat3));
+		Produto p1 = new Produto(null, "Computador", 2000.00);
+		Produto p2 = new Produto(null, "Impressora", 800.00);
+		Produto p3 = new Produto(null, "Mouse", 80.00);
 		
+		cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
+		cat2.getProdutos().addAll(Arrays.asList(p2));
+		
+		p1.getCategorias().addAll(Arrays.asList(cat1));
+		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		p3.getCategorias().addAll(Arrays.asList(cat1));
+		
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 	}
 
 }
