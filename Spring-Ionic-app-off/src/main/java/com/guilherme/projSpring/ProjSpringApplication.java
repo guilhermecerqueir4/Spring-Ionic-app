@@ -13,6 +13,7 @@ import com.guilherme.projSpring.domain.Cidade;
 import com.guilherme.projSpring.domain.Cliente;
 import com.guilherme.projSpring.domain.Endereco;
 import com.guilherme.projSpring.domain.Estado;
+import com.guilherme.projSpring.domain.ItemPedido;
 import com.guilherme.projSpring.domain.Pagamento;
 import com.guilherme.projSpring.domain.PagamentoComBoleto;
 import com.guilherme.projSpring.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.guilherme.projSpring.repositories.CidadeRepository;
 import com.guilherme.projSpring.repositories.ClienteRepository;
 import com.guilherme.projSpring.repositories.EnderecoRepository;
 import com.guilherme.projSpring.repositories.EstadoRepository;
+import com.guilherme.projSpring.repositories.ItemPedidoRepository;
 import com.guilherme.projSpring.repositories.PagamentoRepository;
 import com.guilherme.projSpring.repositories.PedidoRepository;
 import com.guilherme.projSpring.repositories.ProdutoRepository;
@@ -49,6 +51,8 @@ public class ProjSpringApplication implements CommandLineRunner  {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProjSpringApplication.class, args);
@@ -85,18 +89,31 @@ public class ProjSpringApplication implements CommandLineRunner  {
 		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
 		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
 		
+		ItemPedido ip1 = new ItemPedido(ped1, prod1, 0.00, 1, 2000.0);
+		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0.00, 2, 80.0);
+		ItemPedido ip3 = new ItemPedido(ped2, prod2, 100.00, 1, 80.0);
+		
+		//Atribuindo as associacoes
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
 		ped1.setPagamento(pagto1); //atribuindo um pagamento ao pedido 1
 		ped2.setPagamento(pagto2); //atribuindo um pagamento ao pedido 2
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
 		
-		//Atribuindo as associacoes
+		
 		cat1.getProdutos().addAll(Arrays.asList(prod1,prod2,prod3));
 		cat2.getProdutos().addAll(Arrays.asList(prod2));
 		
 		prod1.getCategorias().addAll(Arrays.asList(cat1));
 		prod2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		prod3.getCategorias().addAll(Arrays.asList(cat1));
+		
+		prod1.getItens().addAll(Arrays.asList(ip1));
+		prod2.getItens().addAll(Arrays.asList(ip3));
+		prod3.getItens().addAll(Arrays.asList(ip2));
 	
 		est1.getCidades().addAll(Arrays.asList(c1));
 		est2.getCidades().addAll(Arrays.asList(c2, c3));
@@ -114,6 +131,7 @@ public class ProjSpringApplication implements CommandLineRunner  {
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));	
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 		
 		
