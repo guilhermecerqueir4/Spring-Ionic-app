@@ -3,10 +3,12 @@ package com.guilherme.projSpring.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.guilherme.projSpring.domain.Categoria;
 import com.guilherme.projSpring.repositories.CategoriaRepository;
+import com.guilherme.projSpring.services.exceptions.DataIntegrityException;
 //import com.guilherme.projSpring.services.exceptions;
 import com.guilherme.projSpring.services.exceptions.ObjNotFoundException;
 
@@ -33,6 +35,16 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 	
+	//Delete no banco
+		public void  delete (Integer id) {
+			find(id);
+			try {
+				repo.deleteById(id);
+				}
+		catch(DataIntegrityViolationException e){
+				throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
+			}
+		}
 	}
 	
 
