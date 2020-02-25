@@ -66,6 +66,11 @@ public class ProjSpringApplication implements CommandLineRunner  {
 		//Criando as instanciacoes das classes de dominio
 		Categoria cat1 = new Categoria(null, "informatica");
 		Categoria cat2 = new Categoria(null, "escritorio");
+		Categoria cat3 = new Categoria(null, "cama");
+		Categoria cat4 = new Categoria(null, "carros");
+		Categoria cat5 = new Categoria(null, "eletronicos");
+		Categoria cat6 = new Categoria(null, "lavanderia");
+		Categoria cat7 = new Categoria(null, "perfumaria");
 		
 		Produto prod1 = new Produto(null, "Computador", 2000.00);
 		Produto prod2 = new Produto(null, "Impressora", 800.00);
@@ -123,7 +128,7 @@ public class ProjSpringApplication implements CommandLineRunner  {
 		
 		//Salvando as instanciacoes no banco de dados utilizando classes Repositories.
 		//Salvar por ultimo as classes que sao dependentes de outras classes.
-		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
+		categoriaRepository.saveAll(Arrays.asList(cat1,cat2, cat3, cat4, cat5, cat6 ,cat7));
 		produtoRepository.saveAll(Arrays.asList(prod1,prod2,prod3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));	
