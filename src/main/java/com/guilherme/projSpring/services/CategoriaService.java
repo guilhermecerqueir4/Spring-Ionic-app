@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.guilherme.projSpring.domain.Categoria;
+import com.guilherme.projSpring.domain.Cliente;
 import com.guilherme.projSpring.dto.CategoriaDTO;
 import com.guilherme.projSpring.repositories.CategoriaRepository;
 import com.guilherme.projSpring.services.exceptions.DataIntegrityException;
@@ -36,8 +37,9 @@ public class CategoriaService {
 	}
 	//update no banco. chama o metodo de buscar o ID e ver se existe
 	public Categoria update (Categoria obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
 	//Delete no banco
@@ -62,6 +64,11 @@ public class CategoriaService {
 		
 		public Categoria fromDto (CategoriaDTO objDto) {
 			return new Categoria(objDto.getId(), objDto.getNome());
+		}
+		
+		private void updateData(Categoria newObj, Categoria obj) {
+			newObj.setNome(obj.getNome());
+			
 		}
 		
 	}
