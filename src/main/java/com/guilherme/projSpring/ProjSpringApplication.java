@@ -64,17 +64,28 @@ public class ProjSpringApplication implements CommandLineRunner  {
 	public void run(String... args) throws Exception {
 		
 		//Criando as instanciacoes das classes de dominio
-		Categoria cat1 = new Categoria(null, "informatica");
-		Categoria cat2 = new Categoria(null, "escritorio");
-		Categoria cat3 = new Categoria(null, "cama");
-		Categoria cat4 = new Categoria(null, "carros");
-		Categoria cat5 = new Categoria(null, "eletronicos");
-		Categoria cat6 = new Categoria(null, "lavanderia");
-		Categoria cat7 = new Categoria(null, "perfumaria");
+		Categoria cat1 = new Categoria(null, "Placas-mãe");
+		Categoria cat2 = new Categoria(null, "Placas de vídeo");
+		Categoria cat3 = new Categoria(null, "Disco Rígido (HD)");
+		Categoria cat4 = new Categoria(null, "Memória RAM");
+		Categoria cat5 = new Categoria(null, "Processadores");
+		Categoria cat6 = new Categoria(null, "Teclado/Mouse");
+		Categoria cat7 = new Categoria(null, "Outros");
 		
-		Produto prod1 = new Produto(null, "Computador", 2000.00);
-		Produto prod2 = new Produto(null, "Impressora", 800.00);
-		Produto prod3 = new Produto(null, "Mouse", 80.00);
+		
+		Produto prod1 = new Produto(null, "Placa-Mãe ASRock A320M-HD, AMD AM4, mATX, DDR4", 319.90);
+		Produto prod2 = new Produto(null, "Placa-Mãe Asus EX-A320M-Gaming, AMD AM4, mATX, DDR4", 465.90);
+		Produto prod3 = new Produto(null, "Placa-mãe Gigabyte B450 Aorus M, AMD AM4, mATX, DDR4", 589.90);
+		Produto prod4 = new Produto(null, "Placa de Vídeo Galax NVIDIA GeForce GTX 1660 1-Click OC, 6GB, GDDR5 - 60SRH7DSY91C", 899.00);
+		Produto prod5 = new Produto(null, "Placa de Vídeo Asus AMD Radeon RX 580 OC 8GB, GDDR5 - DUAL-RX580-O8G", 679.00);
+		Produto prod6 = new Produto(null, "Placa de Vídeo Galax NVIDIA RTX 2060 EX White (1-Click OC) 6GB, GDDR6 - 26NRL7HPY3EW", 2133.90);
+		Produto prod7 = new Produto(null, "HD Seagate BarraCuda, 1TB, 3.5´, SATA - ST1000DM010", 259.60);
+		Produto prod8 = new Produto(null, "HD Seagate Externo Portátil Expansion USB 3.0 2TB Preto - STEA2000400", 339.00);
+		Produto prod9 = new Produto(null, "Memória HyperX Fury, 8GB, 2666MHz, DDR4, CL16, Preto - HX426C16FB3/8", 229.00);
+		Produto prod10 = new Produto(null, "Memória Kingston 8GB, 2400MHz, DDR4, CL17 - KVR24N17S8/8", 205.00);
+		Produto prod11 = new Produto(null, "Processador AMD Ryzen 5 1600, Cache 19MB, 3.2GHz (3.6GHz Max Turbo), AM4 - YD1600BBAFBOX", 629.00);
+		Produto prod12 = new Produto(null, "Processador Intel Core i5-9400F Coffee Lake, Cache 9MB, 2.9GHz (4.1GHz Max Turbo), LGA 1151, Sem Vídeo - BX80684I59400F", 810.00);
+		
 		
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
@@ -110,11 +121,23 @@ public class ProjSpringApplication implements CommandLineRunner  {
 		
 		
 		cat1.getProdutos().addAll(Arrays.asList(prod1,prod2,prod3));
-		cat2.getProdutos().addAll(Arrays.asList(prod2));
-		
+		cat2.getProdutos().addAll(Arrays.asList(prod4, prod5, prod6));
+		cat3.getProdutos().addAll(Arrays.asList(prod7, prod8));
+		cat4.getProdutos().addAll(Arrays.asList(prod9, prod10));
+		cat4.getProdutos().addAll(Arrays.asList(prod11, prod12));
+
 		prod1.getCategorias().addAll(Arrays.asList(cat1));
-		prod2.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		prod2.getCategorias().addAll(Arrays.asList(cat1));
 		prod3.getCategorias().addAll(Arrays.asList(cat1));
+		prod4.getCategorias().addAll(Arrays.asList(cat2));
+		prod5.getCategorias().addAll(Arrays.asList(cat2));
+		prod6.getCategorias().addAll(Arrays.asList(cat2));
+		prod7.getCategorias().addAll(Arrays.asList(cat3));
+		prod8.getCategorias().addAll(Arrays.asList(cat3));
+		prod9.getCategorias().addAll(Arrays.asList(cat4));
+		prod10.getCategorias().addAll(Arrays.asList(cat4));
+		prod11.getCategorias().addAll(Arrays.asList(cat5));
+		prod12.getCategorias().addAll(Arrays.asList(cat5));
 		
 		prod1.getItens().addAll(Arrays.asList(ip1));
 		prod2.getItens().addAll(Arrays.asList(ip3));
@@ -129,7 +152,7 @@ public class ProjSpringApplication implements CommandLineRunner  {
 		//Salvando as instanciacoes no banco de dados utilizando classes Repositories.
 		//Salvar por ultimo as classes que sao dependentes de outras classes.
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2, cat3, cat4, cat5, cat6 ,cat7));
-		produtoRepository.saveAll(Arrays.asList(prod1,prod2,prod3));
+		produtoRepository.saveAll(Arrays.asList(prod1,prod2,prod3, prod4, prod4, prod5, prod6, prod7, prod8, prod9, prod10,prod11,prod12));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));	
 		clienteRepository.saveAll(Arrays.asList(cli1));					
