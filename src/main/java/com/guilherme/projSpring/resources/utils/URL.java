@@ -27,5 +27,5 @@ public class URL {
 		}
 	}	
 
-	//TESTE FETCH
+	//TESTE FETCH - oi
 }
