@@ -67,8 +67,9 @@ public class DBService {
 		Categoria cat5 = new Categoria(null, "Processadores");
 		Categoria cat6 = new Categoria(null, "Teclado/Mouse");
 		Categoria cat7 = new Categoria(null, "Outros");
+		//Categoria cat8 = new Categoria(null, "Teste");
 		
-		
+			
 		Produto prod1 = new Produto(null, "Placa-Mãe ASRock A320M-HD, AMD AM4, mATX, DDR4", 319.90);
 		Produto prod2 = new Produto(null, "Placa-Mãe Asus EX-A320M-Gaming, AMD AM4, mATX, DDR4", 465.90);
 		Produto prod3 = new Produto(null, "Placa-mãe Gigabyte B450 Aorus M, AMD AM4, mATX, DDR4", 589.90);
