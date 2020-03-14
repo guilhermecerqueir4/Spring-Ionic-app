@@ -1,4 +1,4 @@
-package com.guilherme.projSpring.config;
+/*package com.guilherme.projSpring.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -14,4 +14,4 @@ public class SecurityConfig {
 		.and().
 		withUser("avanco").password("{noop}ads").roles("ADMIN");
 	}
-}
+}*/
