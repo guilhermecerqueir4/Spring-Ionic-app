@@ -14,4 +14,13 @@ public class SecurityConfig {
 		.and().
 		withUser("avanco").password("{noop}ads").roles("ADMIN");
 	}
-}*/
+}
+
+
+*<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+
+*/
