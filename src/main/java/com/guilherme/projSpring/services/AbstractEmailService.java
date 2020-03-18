@@ -17,6 +17,8 @@ import com.guilherme.projSpring.domain.Pedido;
 
 public abstract class AbstractEmailService implements EmailService{
 	
+	 String src = "https://i.imgur.com/DdKH3q6.png";
+	
 	@Value("${default-sender}")
 	private String sender;
 	
