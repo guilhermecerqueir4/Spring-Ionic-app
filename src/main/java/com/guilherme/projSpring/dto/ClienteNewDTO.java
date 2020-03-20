@@ -46,6 +46,9 @@ public class ClienteNewDTO implements Serializable{
 
 	private Integer cidadeId;
 	
+	@NotEmpty(message="Digitar senha.")
+	private String senha;
+	
 	public ClienteNewDTO () {
 		
 		}
@@ -154,6 +157,14 @@ public class ClienteNewDTO implements Serializable{
 
 	public void setTelefone3(String telefone3) {
 		this.telefone3 = telefone3;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	
